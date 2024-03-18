@@ -1,14 +1,20 @@
 # TDT4145 Databse Project part II
 
-The database file attached is already created with the necessary tabels and constraints, but we recommend everyone runs the attached setup to make sure the tabels match our current mapping of the database. The script also includes needed values that will be used later in queries.
+The database file attached is already created with the necessary tabels and constraints, but we recommend everyone runs the attached setup .sql file (SetupFile.sql) to make sure the tabels match our current mapping of the database. The script also includes needed values that will be used later in queries, as described in user story 1.
 
-    To run an sql script, simply open it in DB Browser's exectute SQL tab. ![Guiding image](/DBProsject/Resources/image.png)
+    To run an sql script, simply open it in DB Browser's exectute SQL tab:
+
+![Guiding image](/DBProsject/Resources/image.png)
+
+We have also implemented a python script that fills in more needed data as described in user story 2. The next step is therefore to run the attached SetupScript.py file.
+
+When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal.
+
+The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. Equal to how the SetupFile.sql was ran.
 
 ## User stories
 
-1. We wish to insert the two halls mentioned above, together with chairs, plays, performances,
-   acts, roles, actors and other actors, as described in the text above. This can be implemented
-   in SQL.
+1. We wish to insert the two halls mentioned above, together with chairs, plays, performances, acts, roles, actors and other actors, as described in the text above. This can be implemented in SQL.
 
 2. With the assignment, some files have been posted that describe which chairs have already been sold for some performances. Here, a Python program will be created that reads the files and inserts which chairs have been sold. It is OK if you insert the chairs as well based on these text files. It is also OK for the buyer of the already sold chairs to be a standard user. i.e. the same preset user.
 
@@ -22,9 +28,23 @@ The database file attached is already created with the necessary tabels and cons
 
 7. You should create a Python program (and SQL) that takes an actor's name and finds which actors they have played with in the same act. Write the names of both and which play it happened on
 
+## Results
+
+Here we showcase the different outputs that we got from implementing the different use cases.
+
+1. After setting up the database and filling in the mentioned values the results should be similar to these screenshots
+
+2. After running the python script we
+
+3.
+4.
+5.
+6.
+7.
+
 ## Comments
 
-## Tips
+## Tips (Unødvendig? )
 
 Noen tips til prosjektet
 
