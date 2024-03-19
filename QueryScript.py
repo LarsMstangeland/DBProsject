@@ -8,7 +8,20 @@ import sqlite3
 con = sqlite3.connect("teaterstykke.db")
 cursor = con.cursor()
 
-os.system('clear')
+
+def clear():
+ 
+    # for windows
+    if os.name == 'nt':
+        _ = os.system('cls')
+ 
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = os.system('clear')
+
+clear()
+
+
 
 #Function for making a reservation
 def make_reservation(user):
@@ -23,7 +36,7 @@ def make_reservation(user):
     cursor.execute("SELECT s.Omraade_ID, s.rad, GROUP_CONCAT(s.Stolnr) AS Tilgjengelige_seter FROM Sete s WHERE s.Omraade_ID IN (1, 2, 3) AND NOT EXISTS (SELECT 1 FROM Billett b JOIN Bestilling o ON b.Bestilling_ID = o.Bestilling_ID WHERE b.Stolnr = s.Stolnr AND b.Rad = s.Rad AND b.Omraade_ID = s.Omraade_ID AND o.Teaterstykke_ID = " + str(show_id) + " AND o.FTid = '" + show_time + "' AND o.FDato = '" + show_date + "') GROUP BY s.Rad, s.Omraade_ID HAVING COUNT(*) >= " + str(number_of_tickets) + " ORDER BY s.Omraade_ID LIMIT 1;")
     row = cursor.fetchone()
 
-    os.system('clear')
+    clear()
     print(str(user[1]) + "´s booking for Størst av alt er kjærligheten 3. february")
 
     #Returns the user to the main menu if there´s not enough available seats
@@ -36,12 +49,10 @@ def make_reservation(user):
         #Gets the date of the order
         date_now = date.today()
         order_date = date_now.strftime("%d.%m.%Y")
-        order_date = "'" + order_date + "'"
 
         #Gets the time of the order
         current_time = datetime.now()
         order_time = current_time.strftime("%H:%M")
-        order_time = "'" + order_time + "'"
 
         #Makes an order and returnes order_ID
         cursor.execute('INSERT INTO Bestilling(Dato, Tidspunkt, Kunde_ID, Teaterstykke_ID, FDato, FTid) VALUES (?, ?, ? , ?, ?, ?)', (order_date, order_time, user[0], show_id, show_date, show_time))
@@ -67,10 +78,10 @@ def make_reservation(user):
         print(str(number_of_tickets) + " " + customer_group + " tickets cost: " + str(number_of_tickets * price))
 
 
-#Function to handle answear about reservations
+#Function to handle answer about reservations
 def answer_reservation(user):
 
-    os.system('clear')
+    clear()
     
     #Lets the user deciede if they want to make a reservation
     print(str(user[1]) + " - would you like to book 9 seats to Størst av alt er kjærligheten 3. february?")
@@ -78,15 +89,15 @@ def answer_reservation(user):
     if(choice_reservation.upper() == "Y"):
         make_reservation(user)
     elif(choice_reservation.upper() == "N"):
-        os.system('clear')
+        clear()
         print("You will be returned to the main menu again in 3 seconds")
         time.sleep(3)
         main()
     else:
-        os.system('clear')
+        clear()
         print("Unvalid input, try again in 3 seconds")
         time.sleep(3)
-        os.system('clear')
+        clear()
         answer_reservation(user)
 
 
@@ -96,7 +107,7 @@ def user_for_reservation():
     cursor.execute("Select Kunde_ID, Fornavn, Etternavn from Kunde where Kunde_ID != 2")
     customers = cursor.fetchall()
 
-    os.system('clear')
+    clear()
     customer_counter = 0
 
     #Prints the different users and lets us choose one
@@ -110,10 +121,8 @@ def user_for_reservation():
 
 #Function to handle sales user story
 def sales():
-    print("Choose a date to look at")
+    print("Choose a date to look at (dd.mm.yyyy):")
     DateInput =input()
-    print(DateInput)
-
 
     sporring = """
     SELECT Teaterstykke.Navn, count(Bestilling.Bestilling_ID) as AntallSolgteBilleter
@@ -133,7 +142,7 @@ def sales():
         print(row)
 
 
-#Function to handle actor user story
+#Function to handle userstory 7
 def actors():
 
     print("Choose a name to look at")
@@ -151,20 +160,33 @@ def actors():
     INNER JOIN Rolle_i_akt on Rolle.Rolle_ID = Rolle_i_akt.Rolle_ID
     INNER JOIN Akt on (akt.AktNr, akt.Teaterstykke_ID) = (Rolle_i_akt.AktNr, Rolle_i_akt.Teaterstykke_ID)
     INNER JOIN Teaterstykke on Teaterstykke.Teaterstykke_ID = Akt.Teaterstykke_ID
-    WHERE Akt.AktNr IN (SELECT Akt.AktNr From Person as p1 INNER JOIN Skuespiller on Skuespiller.Ansatt_ID = p1.Ansatt_ID INNER JOIN Skuespiller_i_rolle on Skuespiller.Ansatt_ID = Skuespiller_i_rolle.Ansatt_ID INNER JOIN Rolle on Rolle.Rolle_ID = Skuespiller_i_rolle.Rolle_ID INNER JOIN Rolle_i_akt on Rolle_i_akt.Rolle_ID = Rolle.Rolle_ID INNER JOIN Akt on (Rolle_i_akt.AktNr, Rolle_i_akt.Teaterstykke_ID) = (Akt.AktNr, Rolle_i_akt.Teaterstykke_ID) INNER JOIN Teaterstykke on Teaterstykke.Teaterstykke_ID = Akt.Teaterstykke_ID WHERE (p1.Fornavn, p1.Etternavn) = (?,?))"""
-
+    WHERE (Teaterstykke.Teaterstykke_ID, Akt.AktNr) IN (SELECT Teaterstykke.Teaterstykke_ID, Akt.AktNr 
+						From Person as p1 
+						INNER JOIN Skuespiller on Skuespiller.Ansatt_ID = p1.Ansatt_ID 
+						INNER JOIN Skuespiller_i_rolle on Skuespiller.Ansatt_ID = Skuespiller_i_rolle.Ansatt_ID 
+						INNER JOIN Rolle on Rolle.Rolle_ID = Skuespiller_i_rolle.Rolle_ID 
+						INNER JOIN Rolle_i_akt on Rolle_i_akt.Rolle_ID = Rolle.Rolle_ID 
+						INNER JOIN Akt on (Rolle_i_akt.AktNr, Rolle_i_akt.Teaterstykke_ID) = (Akt.AktNr, Akt.Teaterstykke_ID) 
+						INNER JOIN Teaterstykke on Teaterstykke.Teaterstykke_ID = Akt.Teaterstykke_ID 
+						WHERE (p1.Fornavn, p1.Etternavn) = (?,?))
+						AND NOT (Person.Fornavn, Person.Etternavn) = (?,?)"""
     
-    cursor.execute(sporring, [FirstNameInput, LastNameInput])
+    cursor.execute(sporring, [FirstNameInput, LastNameInput,FirstNameInput,LastNameInput,])
     rows = cursor.fetchall()
 
     print(FirstNameInput+ " "+LastNameInput+ " har spilt i samme stykke som: ")
+
+
+    clear()
     for row in rows:
+        print(FirstNameInput+ " "+LastNameInput)
         print(row)
 
 
 #Main function
 def main():
-    os.system('clear')
+    print(os.name)
+    clear()
     #Lets the user choose a user story to complete
     print("Welcome! Select your desired action:")
     print("1 - Make reservation (user story 3)")
@@ -172,7 +194,7 @@ def main():
     print("3 - Find actors who have played togheter (user story 7)")
     choice1 = input("Make your choice by number: ")
 
-    os.system('clear')
+    clear()
 
     #Refrences the chosen function
     if(choice1 == "1"):
@@ -182,10 +204,10 @@ def main():
     elif(choice1 == "3"):
         actors()
     else:
-        os.system('clear')
+        clear()
         print("Unvalid input, try again in 3 seconds")
         time.sleep(3)
-        os.system('clear')
+        clear()
         main()
 
 main()

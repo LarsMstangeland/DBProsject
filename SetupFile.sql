@@ -161,7 +161,7 @@ INSERT INTO "Person" VALUES (19,'Marte','M. Steinholt','Fast','marte.steinholt@g
 INSERT INTO "Person" VALUES (20,'Tor Ivar','Hagen','Fast','tor.ivar.hagen@gmail.com');
 INSERT INTO "Person" VALUES (21,'Trond-Ove','Skrødal','Fast','trond-ove.skroedal@gmail.com');
 INSERT INTO "Person" VALUES (22,'Natalie','Grøndahl Tangen','Fast','natalie.tangen@gmail.com');
-INSERT INTO "Person" VALUES (23,'Ã…smund','Flaten','Fast','aasmund.flaten@gmail.com');
+INSERT INTO "Person" VALUES (23,'Åsmund','Flaten','Fast','aasmund.flaten@gmail.com');
 INSERT INTO "Person" VALUES (24,'Jonas','Corell Petersen','Fast','jonas.petersen@gmail.com');
 INSERT INTO "Person" VALUES (25,'David','Gehrt','Fast','david.gehrt@gmail.com');
 INSERT INTO "Person" VALUES (26,'Gaute','Tønder','Fast','gaute.toender@gmail.com');
@@ -240,7 +240,7 @@ INSERT INTO "Rolle" VALUES (18,'Marte','M. Steinholt');
 INSERT INTO "Rolle" VALUES (19,'Tor Ivar','Hagen');
 INSERT INTO "Rolle" VALUES (20,'Trond-Ove','Skrødal');
 INSERT INTO "Rolle" VALUES (21,'Natalie','Grøndahl Tangen');
-INSERT INTO "Rolle" VALUES (22,'Ã…smund','Flaten');
+INSERT INTO "Rolle" VALUES (22,'Åsmund','Flaten');
 INSERT INTO "Skuespiller_i_rolle" VALUES (1,1);
 INSERT INTO "Skuespiller_i_rolle" VALUES (2,2);
 INSERT INTO "Skuespiller_i_rolle" VALUES (8,3);

@@ -1,4 +1,4 @@
-SELECT Teaterstykke.Navn, Bestilling.FDato, Bestilling.FTid, Count(Billett.Billett_ID) AS AntallSolgteBilleter
+SELECT Teaterstykke.Navn, Bestilling.FDato, Bestilling.FTid, Count(DISTINCT Billett.Billett_ID) AS AntallSolgteBilleter
 FROM Teaterstykke
 INNER JOIN Forestilling on Teaterstykke.Teaterstykke_ID = Forestilling.Teaterstykke_ID
 INNER JOIN Bestilling on Bestilling.Teaterstykke_ID = Teaterstykke.Teaterstykke_ID
