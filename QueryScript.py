@@ -121,7 +121,7 @@ def user_for_reservation():
 
 #Function to handle sales user story
 def sales():
-    print("Choose a date to look at (dd.mm.yyyy):")
+    print("Choose a date to overview the sales of running shows (dd.mm.yyyy):")
     DateInput =input()
 
     sporring = """
@@ -138,8 +138,17 @@ def sales():
     cursor.execute(sporring, [DateInput])
     rows = cursor.fetchall()
 
+    if len(rows) == 0:
+        print("There is no shows this date")
+
+    clear()
+    print("Sales for the date: "+ DateInput)
+    print()
     for row in rows:
-        print(row)
+        sale = str(row[1])
+        print("-> '"+row[0]+ "' currently has: " + sale +" tickets sold")
+    
+    print()
 
 
 #Function to handle userstory 7
@@ -174,14 +183,12 @@ def actors():
     cursor.execute(sporring, [FirstNameInput, LastNameInput,FirstNameInput,LastNameInput,])
     rows = cursor.fetchall()
 
-    print(FirstNameInput+ " "+LastNameInput+ " har spilt i samme stykke som: ")
-
-
     clear()
+    print(FirstNameInput+ " "+LastNameInput+ " har spilt i samme stykke som: ")
+    print()
     for row in rows:
-        print(FirstNameInput+ " "+LastNameInput)
-        print(row)
-
+        print(row[1] +" "+row[0]+ " i stykket: "+ row[2])
+    print()
 
 #Main function
 def main():
