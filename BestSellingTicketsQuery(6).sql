@@ -1,7 +1,6 @@
-SELECT Teaterstykke.Navn, Bestilling.FDato, Bestilling.FTid, Count(DISTINCT Billett.Billett_ID) AS AntallSolgteBilleter
-FROM Teaterstykke
-INNER JOIN Forestilling on Teaterstykke.Teaterstykke_ID = Forestilling.Teaterstykke_ID
-INNER JOIN Bestilling on Bestilling.Teaterstykke_ID = Teaterstykke.Teaterstykke_ID
-INNER JOIN Billett on Billett.Bestilling_ID = Bestilling.Bestilling_ID
-GROUP By Teaterstykke.Teaterstykke_ID
-Order by AntallSolgteBilleter DESC
+ SELECT Teaterstykke.Navn, Forestilling.ForestillingsDato, count(Billett.Billett_ID) as SolgteBilletter
+ FROM Forestilling
+ OUTER LEFT JOIN Bestilling on (Forestilling.ForestillingsDato,Forestilling.Teaterstykke_ID) = (Bestilling.FDato, Bestilling.Teaterstykke_ID)
+ OUTER LEFT JOIN Teaterstykke on Forestilling.Teaterstykke_ID = Teaterstykke.Teaterstykke_ID
+ OUTER LEFT JOIN Billett on Bestilling.Bestilling_ID = Billett.Bestilling_ID
+ GROUP BY Teaterstykke.Teaterstykke_ID, Forestilling.ForestillingsDato

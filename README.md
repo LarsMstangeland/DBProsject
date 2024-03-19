@@ -2,17 +2,21 @@
 
 The database file attached is already created with the necessary tabels and constraints, but we recommend everyone runs the attached setup .sql file (SetupFile.sql) to make sure the tabels match our current mapping of the database. The script also includes needed values that will be used later in queries, as described in user story 1.
 
-### How to setup database
+### How to setup database in sqlite
 
-    1. Open teaterstykke.db file in DB browser.
+    1. Open the teaterstykke.db file in DB browser.
 
-    2. Open the SetupFile.sql file in the script tab within DB browser, as shown in image
+    2. Open the SetupFile.sql file in the tab named "Exectute SQL" within DB browser. Run this to insert the first needed values. Remember to save the database file after running the script.
 
-    3. Run the SetupScript.py file
+    3. Run the SetupScript.py file to insert remaining values, such as seats, orders and tickets.
 
     4. It is now possible to run the QueryScript.py file
 
 When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal. The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. Equal to how the SetupFile.sql was ran.
+
+### How interact with QueryScript
+
+    1. After setting up the database, open the QueryScript.py file in visual studio code.
 
 ## User stories
 
@@ -29,19 +33,5 @@ When this is done we can run the application from the QueryScript file, here we 
 6. We want to create a query in SQL that finds which performances have sold the best. Print the name of the performance and the date and the number of seats sold sorted by the number of seats in descending order.
 
 7. You should create a Python program (and SQL) that takes an actor's name and finds which actors they have played with in the same act. Write the names of both and which play it happened on
-
-## Results
-
-Here we showcase the different outputs that we got from implementing the different use cases.
-
-1. After setting up the database and filling in the mentioned values the results should be similar to these screenshots
-
-2. After running the python script we
-
-3.
-4.
-5.
-6.
-7.
 
 ## Comments
