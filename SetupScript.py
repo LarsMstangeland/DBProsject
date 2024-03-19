@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import date, datetime
-con = sqlite3.connect("")
+con = sqlite3.connect("teaterstykke.db")
 cursor = con.cursor()
 
 

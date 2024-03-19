@@ -5,7 +5,7 @@ from datetime import date, datetime
 import sqlite3
 
 #Intializing SQLite
-con = sqlite3.connect("")
+con = sqlite3.connect("teaterstykke.db")
 cursor = con.cursor()
 
 os.system('clear')
