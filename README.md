@@ -1,16 +1,18 @@
-# TDT4145 Databse Project part II
+# TDT4145 Database Project part II
 
 The database file attached is already created with the necessary tabels and constraints, but we recommend everyone runs the attached setup .sql file (SetupFile.sql) to make sure the tabels match our current mapping of the database. The script also includes needed values that will be used later in queries, as described in user story 1.
 
-    To run an sql script, simply open it in DB Browser's exectute SQL tab:
+### How to setup database
 
-![Guiding image](/DBProsject/Resources/image.png)
+    1. Open teaterstykke.db file in DB browser.
 
-We have also implemented a python script that fills in more needed data as described in user story 2. The next step is therefore to run the attached SetupScript.py file.
+    2. Open the SetupFile.sql file in the script tab within DB browser, as shown in image
 
-When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal.
+    3. Run the SetupScript.py file
 
-The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. Equal to how the SetupFile.sql was ran.
+    4. It is now possible to run the QueryScript.py file
+
+When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal. The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. Equal to how the SetupFile.sql was ran.
 
 ## User stories
 
@@ -43,44 +45,3 @@ Here we showcase the different outputs that we got from implementing the differe
 7.
 
 ## Comments
-
-## Tips (Unødvendig? )
-
-Noen tips til prosjektet
-
-Det er enklest å lage hele prosjektet for bruk av terminalen til å lage input
-til programmet ditt.
-
-Her er et eksempel kjørt på ubuntu. Vi leser inn og kjører skjemaet og
-innsetting av initielle data ved hjelp av .read-kommandoen i sqlite3.
-
-sveinbra@mersey:~/fag/tdt4145/2024/prosjekt$ sqlite3 teater.db
-SQLite version 3.37.2 2022-01-06 13:25:41
-Enter ".help" for usage hints.
-sqlite> .read schema.sql
-sqlite> .read insert-db.sql
-sqlite> .q
-
-Her er vi sensorer avhengig av å få levert en tom database, evt. en beskrivelse av hva databasefilen heter i dokumentet.
-
-For kjøring av Python for innsetting av allerede solgte seter:
-sveinbra@mersey:~/fag/tdt4145/2024/prosjekt$ python3 scan-seats-hovedscenen.py hovedscenen.txt
-sveinbra@mersey:~/fag/tdt4145/2024/prosjekt$ python3 scan-seats-gamle-scene.py gamle-scene.txt
-
-osv.
-
-Noen Python-tips:
-
-Når du pakker ut en linje fra tekstinput, kan du fjerne newline-merket, ved å gjøre følgende:
-
-    stringlength=len(myline)
-        slicedline=myline[stringlength::-1]
-        for c in slicedline:
-
-For å lese Dato fra input:
-
-    if "Dato" in myline:
-        words = myline.split()
-        for word in words:
-            if len(word) == 10 and word[4] == "-" and word[7] == "-":
-                dato =  word

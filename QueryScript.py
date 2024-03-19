@@ -19,9 +19,6 @@ def clear():
     else:
         _ = os.system('clear')
 
-clear()
-
-
 
 #Function for making a reservation
 def make_reservation(user):
@@ -121,9 +118,12 @@ def user_for_reservation():
 
 #Function to handle sales user story
 def sales():
+
+    #Gets the wanted date from user and saves it as DateInput
     print("Choose a date to overview the sales of running shows (dd.mm.yyyy):")
     DateInput =input()
 
+    #The query used, saved in its own variable
     sporring = """
     SELECT Teaterstykke.Navn, count(Bestilling.Bestilling_ID) as AntallSolgteBilleter
     From Teaterstykke
@@ -134,32 +134,37 @@ def sales():
     GROUP by Teaterstykke.Navn
     """
 
-
+    #Execution of the query, with needed parameters
     cursor.execute(sporring, [DateInput])
     rows = cursor.fetchall()
 
+    #Informs the user that no shows are on the given date
     if len(rows) == 0:
         print("There is no shows this date")
 
-    clear()
-    print("Sales for the date: "+ DateInput)
-    print()
-    for row in rows:
-        sale = str(row[1])
-        print("-> '"+row[0]+ "' currently has: " + sale +" tickets sold")
-    
-    print()
+    else:
+        #Clears the terminal and prints the sales found in the executed query
+        clear()
+        print("Sales for the date: "+ DateInput)
+        print()
+        for row in rows:
+            sale = str(row[1])
+            print("-> '"+row[0]+ "' currently has: " + sale +" tickets sold")
+        #Prints an empty line to increase readability
+        print()
 
 
-#Function to handle userstory 7
+#Function to handle user story 7
 def actors():
 
+    #Gets the first name and last name from user. Saves this in respective variables
     print("Choose a name to look at")
     print("Firstname: ")
     FirstNameInput =input()
     print("Lastname: ")
     LastNameInput =input()
 
+    #The query used to fetch all actors that has played in the same play as the named person
     sporring ="""
     SELECT DISTINCT Person.Etternavn, Person.Fornavn, Teaterstykke.Navn 
     FROM Person 
@@ -180,19 +185,26 @@ def actors():
 						WHERE (p1.Fornavn, p1.Etternavn) = (?,?))
 						AND NOT (Person.Fornavn, Person.Etternavn) = (?,?)"""
     
+    #Execution of the query with needed parameters
     cursor.execute(sporring, [FirstNameInput, LastNameInput,FirstNameInput,LastNameInput,])
     rows = cursor.fetchall()
 
-    clear()
-    print(FirstNameInput+ " "+LastNameInput+ " har spilt i samme stykke som: ")
-    print()
-    for row in rows:
-        print(row[1] +" "+row[0]+ " i stykket: "+ row[2])
-    print()
+    #If the query returns empty this is told to the user
+    if len(rows) == 0:
+        clear()
+        print("The actor: "+FirstNameInput +" "+ LastNameInput+" has not played with anyone else")
+
+    else:
+        #Clears terminal and presents the rows in a formated way
+        clear()
+        print(FirstNameInput+ " "+LastNameInput+ " has played in the same play as: ")
+        print()
+        for row in rows:
+            print(row[1] +" "+row[0]+ " in the play: "+ row[2])
+        print()
 
 #Main function
 def main():
-    print(os.name)
     clear()
     #Lets the user choose a user story to complete
     print("Welcome! Select your desired action:")
