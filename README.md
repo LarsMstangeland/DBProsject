@@ -12,7 +12,7 @@ The database file attached is already created with the necessary tabels and cons
 
     4. It is now possible to run the QueryScript.py file
 
-When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal. The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. Equal to how the SetupFile.sql was ran.
+When this is done we can run the application from the QueryScript file, here we have implemented the described queries in user story 3,4,7. The interactions are done in the Visual studio code terminal. The user stories mentioned as number 5 and 6 are only represented as .sql scripts, these can also be tested by opening the attached scripts from DB browser. To test userstory number 5 run ActorQuery.sql script, and to run userstory number 6 run the BestSellingTicketsQuery.sql.
 
 ### How interact with QueryScript
 
